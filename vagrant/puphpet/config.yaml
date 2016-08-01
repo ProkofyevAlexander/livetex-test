@@ -353,6 +353,7 @@ nodejs:
         version: '5'
     npm_packages:
         - gulp
+        - bower
 hhvm:
     install: '0'
     nightly: 0

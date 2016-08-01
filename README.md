@@ -14,9 +14,8 @@ vagrant ssh
 mysql -udbuser -p123 < /var/www/livetex-test/install/db.sql
 cd /var/www/livetex-test
 composer install
+bower install
 ```
-
-
 
 ## Url
 

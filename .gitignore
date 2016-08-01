@@ -1,8 +1,2 @@
 .idea
 vagrant/.vagrant
-composer.lock
-www/vendor
-www/cache/*
-!www/cache/twig
-www/cache/twig/*
-!www/cache/twig/.stub

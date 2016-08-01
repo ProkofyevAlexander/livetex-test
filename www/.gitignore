@@ -1,0 +1,7 @@
+composer.lock
+vendor
+cache/*
+!cache/twig
+cache/twig/*
+!cache/twig/.stub
+public/vendor

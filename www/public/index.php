@@ -2,7 +2,10 @@
 
 require __DIR__ . '/../vendor/autoload.php';
 
+use Symfony\Bridge\Twig\Extension\AssetExtension;
 use Symfony\Bridge\Twig\Extension\RoutingExtension;
+use Symfony\Component\Asset\Packages;
+use Symfony\Component\Asset\PathPackage;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,6 +21,7 @@ use Symfony\Component\Routing\RequestContext;
 
 
 use LivetexTest\System\Views;
+use LivetexTest\System\DateVersionStrategy;
 
 define('DEBUG', true);
 
@@ -34,7 +38,12 @@ $context = new RequestContext('/');
 $matcher = new UrlMatcher($routes, $context);
 
 
-/* Templates */
+/* Views and assets */
+$assets = new PathPackage(
+    '/',
+    new DateVersionStrategy()
+);
+
 $loader = new Twig_Loader_Filesystem($viewsDir);
 $twig = new Twig_Environment($loader, array(
     'debug' => DEBUG,
@@ -42,6 +51,7 @@ $twig = new Twig_Environment($loader, array(
 ));
 
 $twig->addExtension(new RoutingExtension(new UrlGenerator($routes, $context)));
+$twig->addExtension(new AssetExtension(new Packages($assets)));
 
 Views::setLoader($twig);
 
