@@ -1,0 +1,10 @@
+index:
+    path:     /
+    defaults: { _controller: 'LivetexTest\Controllers\MainController::index' }
+    methods:  [GET]
+
+main_with_param:
+    path:     /{test}
+    defaults: { _controller: 'LivetexTest\Controllers\MainController::param' }
+    methods:  [GET]
+

@@ -1,0 +1,23 @@
+{
+  "name": "root/livetex-test",
+  "require": {
+    "twig/twig": "^1.24",
+    "symfony/routing": "^3.1",
+    "symfony/config": "^3.1",
+    "symfony/yaml": "^3.1",
+    "symfony/http-foundation": "^3.1",
+    "symfony/http-kernel": "^3.1",
+    "symfony/event-dispatcher": "^3.1"
+  },
+  "authors": [
+    {
+      "name": "Prokofyev Alexander",
+      "email": "a.a.prokofyev@mail.ru"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "LivetexTest\\": "classes"
+    }
+  }
+}
