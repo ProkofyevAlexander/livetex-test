@@ -22,6 +22,7 @@ use Symfony\Component\Routing\RequestContext;
 
 use LivetexTest\System\Views;
 use LivetexTest\System\DateVersionStrategy;
+use LivetexTest\Controllers\BaseController;
 
 define('DEBUG', true);
 
@@ -50,9 +51,13 @@ $twig = new Twig_Environment($loader, array(
     'cache' => $cacheTwigDir
 ));
 
-$twig->addExtension(new RoutingExtension(new UrlGenerator($routes, $context)));
-$twig->addExtension(new AssetExtension(new Packages($assets)));
+$generator = new UrlGenerator($routes, $context);
 
+$twig->addExtension(new RoutingExtension($generator));
+$twig->addExtension(new AssetExtension(new Packages($assets)));
+$twig->addExtension(new Twig_Extension_Debug());
+
+BaseController::setUlrGenerator($generator);
 Views::setLoader($twig);
 
 

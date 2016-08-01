@@ -3,7 +3,7 @@
 namespace LivetexTest\Controllers;
 
 
-class SearchResultsController extends BaseAbstractController
+class SearchResultsController extends BaseController
 {
     public function all() {
         return $this->getResponse(

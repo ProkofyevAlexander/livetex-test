@@ -2,6 +2,42 @@
 
 {% block title %}Index{% endblock %}
 
+{% block script %}
+    <script src="{{ asset('vendor/bootstrap-validator/dist/validator.min.js') }}"></script>
+    <script src="{{ asset('scripts/main/index.js') }}"></script>
+{% endblock %}
+
 {% block content %}
-    <a href="{{ path('searchResults-all') }}">Search results</a>
+    <nav class="navbar navbar-default">
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="{{ path('searchResults-all') }}">Search results</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <form role="form" id="form" action="{{ path('search-newSearch') }}" method="post">
+        <div class="form-group">
+            <label for="url">URL</label>
+            <input class="form-control" type="url" id="url" name="url" required />
+            <div class="help-block with-errors"></div>
+        </div>
+        <div class="form-group">
+            <label for="type">Type</label>
+            <select class="form-control" id="type" name="type" required>
+                <option value="link">link</option>
+                <option value="image">image</option>
+                <option value="text">text</option>
+            </select>
+            <div class="help-block with-errors"></div>
+        </div>
+
+        <div class="form-group" id="text-box" style="display: none;">
+            <label for="text">Text</label>
+            <input class="form-control" type="text" id="text" name="text" />
+            <div class="help-block with-errors"></div>
+        </div>
+        <button type="submit" class="btn btn-primary" id="submit">Search</button>
+    </form>
 {% endblock %}

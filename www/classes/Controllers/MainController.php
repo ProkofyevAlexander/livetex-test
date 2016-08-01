@@ -2,7 +2,7 @@
 
 namespace LivetexTest\Controllers;
 
-class MainController extends BaseAbstractController
+class MainController extends BaseController
 {
     public function index()
     {
