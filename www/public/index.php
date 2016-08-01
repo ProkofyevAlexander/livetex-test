@@ -2,8 +2,8 @@
 
 require __DIR__ . '/../vendor/autoload.php';
 
+use Symfony\Bridge\Twig\Extension\RoutingExtension;
 use Symfony\Component\Config\FileLocator;
-use Symfony\Component\Routing\Loader\YamlFileLoader;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -11,25 +11,20 @@ use Symfony\Component\HttpKernel\Controller\ArgumentResolver;
 use Symfony\Component\HttpKernel\Controller\ControllerResolver;
 use Symfony\Component\HttpKernel\EventListener\RouterListener;
 use Symfony\Component\HttpKernel\HttpKernel;
+use Symfony\Component\Routing\Loader\YamlFileLoader;
+use Symfony\Component\Routing\Generator\UrlGenerator;
 use Symfony\Component\Routing\Matcher\UrlMatcher;
 use Symfony\Component\Routing\RequestContext;
 
-use LivetexTest\System\Templates;
+
+use LivetexTest\System\Views;
 
 define('DEBUG', true);
 
 $configDir = __DIR__ . '/../config';
-$templatesDir = __DIR__ . '/../templates';
+$viewsDir = __DIR__ . '/../views';
 $cacheTwigDir = __DIR__ . '/../cache/twig';
 
-/* Templates */
-$loader = new Twig_Loader_Filesystem($templatesDir);
-$twig = new Twig_Environment($loader, array(
-    'debug' => DEBUG,
-    'cache' => $cacheTwigDir
-));
-
-Templates::setLoader($twig);
 
 /* Routing */
 $locator = new FileLocator(array($configDir));
@@ -37,6 +32,19 @@ $loader = new YamlFileLoader($locator);
 $routes = $loader->load('routes.yml');
 $context = new RequestContext('/');
 $matcher = new UrlMatcher($routes, $context);
+
+
+/* Templates */
+$loader = new Twig_Loader_Filesystem($viewsDir);
+$twig = new Twig_Environment($loader, array(
+    'debug' => DEBUG,
+    'cache' => $cacheTwigDir
+));
+
+$twig->addExtension(new RoutingExtension(new UrlGenerator($routes, $context)));
+
+Views::setLoader($twig);
+
 
 /* Request handling, response */
 $request = Request::createFromGlobals();

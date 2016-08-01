@@ -4,7 +4,7 @@ namespace LivetexTest\Controllers;
 
 use Symfony\Component\HttpFoundation\Response;
 
-use LivetexTest\System\Templates;
+use LivetexTest\System\Views;
 
 abstract class BaseAbstractController
 {
@@ -16,7 +16,7 @@ abstract class BaseAbstractController
 
     public function getResponse($template, $templateData) {
 
-        $template = Templates::getLoader()->loadTemplate($template);
+        $template = Views::getLoader()->loadTemplate($template);
         $html = $template->render($templateData);
 
         $this->response->setContent($html);

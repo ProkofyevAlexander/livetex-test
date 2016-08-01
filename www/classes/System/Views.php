@@ -3,7 +3,7 @@
 namespace LivetexTest\System;
 
 
-class Templates
+class Views
 {
     private static $loader;
 

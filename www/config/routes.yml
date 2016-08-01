@@ -1,10 +1,21 @@
-index:
+main-index:
     path:     /
     defaults: { _controller: 'LivetexTest\Controllers\MainController::index' }
     methods:  [GET]
 
-main_with_param:
-    path:     /{test}
-    defaults: { _controller: 'LivetexTest\Controllers\MainController::param' }
+search-newSearch:
+    path:     /search
+    defaults: { _controller: 'LivetexTest\Controllers\SearchController::newSearch' }
+    methods:  [POST]
+
+searchResults-all:
+    path:     /results
+    defaults: { _controller: 'LivetexTest\Controllers\SearchResultsController::all' }
     methods:  [GET]
 
+searchResults-forSite:
+    path:     /results/{siteId}
+    defaults: { _controller: 'LivetexTest\Controllers\SearchResultsController::forSite' }
+    methods:  [GET]
+    requirements:
+        siteId: '\d+'
