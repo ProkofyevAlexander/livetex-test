@@ -4,7 +4,7 @@
 
 ```
 cd ./vagrant
-vagrant start
+vagrant up
 ```
 
 ## Initial setup
